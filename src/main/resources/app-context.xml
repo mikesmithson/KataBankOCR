@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+	<context:annotation-config />
+
+	<bean id="digitparser" class="com.pillar.katabankocr.parser.DigitParser">
+		<property name="digitLookupMap" ref="digitlookupmap" />
+	</bean>
+
+	<util:map map-class="java.util.HashMap" id="digitlookupmap">
+		<entry key="-2021980254" value="0" />
+		<entry key="1511113376" value="1" />
+		<entry key="-302713119" value="2" />
+		<entry key="-302801439" value="3" />
+		<entry key="-91790205" value="4" />
+		<entry key="-1966627615" value="5" />
+		<entry key="-1966539203" value="6" />
+		<entry key="-360985215" value="7" />
+		<entry key="-1963798431" value="8" />
+		<entry key="-1963886843" value="9" />
+	</util:map>
+
+	<util:map map-class="java.util.HashMap" id="accountreconcilemap">
+		<entry key="0" value="8" />
+		<entry key="1" value="7" />
+		<entry key="2" value="2" />
+		<entry key="3" value="9" />
+		<entry key="4" value="4" />
+		<entry key="5" value="6,9" />
+		<entry key="6" value="5,8" />
+		<entry key="7" value="1" />
+		<entry key="8" value="0,6,9" />
+		<entry key="9" value="3,5,8" />
+		<entry key="?" value="0,1,2,3,4,5,6,7,8,9"/>
+	</util:map>
+
+
+	<bean id="accountvalidator" class="com.pillar.katabankocr.validator.AccountValidator"
+		scope="prototype" />
+
+	<bean id="accountnumberparser" class="com.pillar.katabankocr.parser.AccountNumberParser" />
+
+	<bean id="accountfilereader" class="com.pillar.katabankocr.account.reader.AccountFileReader" />
+
+	<bean id="accountfilewriter" class="com.pillar.katabankocr.account.writer.AccountFileWriter" />
+
+	<bean id="accountcreator" class="com.pillar.katabankocr.account.AccountCreator" />
+
+	<bean id="account" class="com.pillar.katabankocr.account.Account"
+		scope="prototype" />
+
+	<bean id="accountreconciler" class="com.pillar.katabankocr.account.reconcile.AccountReconciler">
+		<property name="accountReconcileMap" ref="accountreconcilemap" />
+	</bean>
+
+</beans>
