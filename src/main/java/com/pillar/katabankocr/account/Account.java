@@ -38,11 +38,11 @@ public class Account {
 		Collections.sort(reconciledAccountArray, new Comparator<String>(){
 			public int compare(String accountOne, String accountTwo)
 			{
-				if(Integer.parseInt(accountOne) > Integer.parseInt(accountTwo))
+				if(accountNumberOneIsGreaterThanAccountNumberTwo(accountOne, accountTwo))
 				{
 					return 1;
 				}
-				else if(Integer.parseInt(accountTwo) > Integer.parseInt(accountOne))
+				else if(!accountNumberOneIsGreaterThanAccountNumberTwo(accountOne, accountTwo))
 				{
 					return -1;
 				}
@@ -50,6 +50,10 @@ public class Account {
 				{
 					return 0;
 				}
+			}
+
+			private boolean accountNumberOneIsGreaterThanAccountNumberTwo(String accountOne, String accountTwo) {
+				return Integer.parseInt(accountOne) > Integer.parseInt(accountTwo);
 			}
 			
 		});
